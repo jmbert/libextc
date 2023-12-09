@@ -29,4 +29,6 @@ libextc_la_SOURCES=libextc.c
 libextc_la_LIBADD= channel/libChannel.a
 include_HEADERS= \
 	include/extchannel.h\
-	include/extcdecl.h
+	include/extcdecl.h\
+	include/extco.h\
+	include/asm-port.h

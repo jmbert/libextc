@@ -1,7 +1,0 @@
-{
-	"files.associations": {
-		".y": "bison",
-		"string.h": "c",
-		"stdlib.h": "c"
-	}
-}

@@ -1,3 +1,4 @@
 build-libextc/
 *.so
 *.cache
+.vscode/
