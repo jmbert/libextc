@@ -31,4 +31,5 @@ include_HEADERS= \
 	include/extchannel.h\
 	include/extcdecl.h\
 	include/extco.h\
-	include/asm-port.h
+	include/asm-port.h\
+	include/compiler.h
