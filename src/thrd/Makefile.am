@@ -16,25 +16,11 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.]
 #
 
-AC_INIT([libextc], [0.0.1])
+noinst_LIBRARIES = libThrd.a
 
-AM_INIT_AUTOMAKE
+libThrd_a_CPPFLAGS= -I$(srcdir)/../include
 
-LT_INIT(
-	[shared]
-	[disable-static]
-)
-AC_SUBST([LIBTOOL_DEPS])
-AC_CONFIG_MACRO_DIRS(m4)
-AC_CONFIG_FILES(
-	[Makefile]
-	[src/Makefile]
-	[src/channel/Makefile]
-	[src/thrd/Makefile]
-)
-AC_PROG_CC
-AM_PROG_AS
-
-AC_LANG([C])
-
-AC_OUTPUT
+libThrd_a_SOURCES= \
+	spawn_thread.c\
+	gettid.c\
+	clone3.S

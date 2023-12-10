@@ -16,16 +16,12 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.]
 ***/
 
-void _register()
-{
-	chreceive();
-	chsend();
-	chinit();
-	chfree();
-	spawn_thread();
-	gettid();
-}
+#include <extthrd.h>
+#include <linux/sched.h>
+#include <unistd.h>
+#include <sys/syscall.h>
 
-void _start()
+exttid_t gettid()
 {
+	return syscall(SYS_gettid);
 }

@@ -38,19 +38,21 @@
 	}_CRT_MANGLE(_crt, _name)\
 
 
-#define crt_setup(_name) \
-	uintptr_t rsp;\
-	uintptr_t rbp\
-
 /*
 	The meat of the coroutine system (very evil)
 	Here we jump over the actual yield, only to call back to it
 	This callback pushes the resume rip onto the stack
 	We then pop it into the resume address, and return
+	Before we return though, we copy the stackframe into a buffer
+	for reuse
+
+	After the return, we make space for the stackframe, and copy it back int
 */
 #define crt_yield(_value, _name) \
 	{\
 	__label__ yield, save_pc;\
+	uintptr_t rsp;\
+	uintptr_t rbp;\
 	goto save_pc;\
 yield:\
 	__asm__ volatile (\
@@ -80,8 +82,6 @@ save_pc:\
 		: "m"(_CRT_MANGLE(_crt, _name)._sfsize));\
 	memcpy((void*)rsp, _CRT_MANGLE(_crt, _name)._sf, _CRT_MANGLE(_crt, _name)._sfsize);\
 	}\
-
-#define crt_init(_name) _CRT_MANGLE(_crt, _name)._sf = NULL;_CRT_MANGLE(_crt, _name)._resume = NULL
 
 #define crt_resume(_name) _CRT_MANGLE(_crt, _name)._resume()
 

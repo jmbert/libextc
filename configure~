@@ -12535,7 +12535,7 @@ CC=$lt_save_CC
 
 
 
-ac_config_files="$ac_config_files Makefile src/Makefile src/channel/Makefile"
+ac_config_files="$ac_config_files Makefile src/Makefile src/channel/Makefile src/thrd/Makefile"
 
 ac_ext=c
 ac_cpp='$CPP $CPPFLAGS'
@@ -14496,6 +14496,7 @@ do
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
     "src/Makefile") CONFIG_FILES="$CONFIG_FILES src/Makefile" ;;
     "src/channel/Makefile") CONFIG_FILES="$CONFIG_FILES src/channel/Makefile" ;;
+    "src/thrd/Makefile") CONFIG_FILES="$CONFIG_FILES src/thrd/Makefile" ;;
 
   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5;;
   esac

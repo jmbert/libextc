@@ -22,14 +22,15 @@ LIBTOOL_DEPS = @LIBTOOL_DEPS@
 libtool: $(LIBTOOL_DEPS)
 	$(SHELL) ./config.status libtool
 
-SUBDIRS=channel
+SUBDIRS= channel thrd
 
-lib_LTLIBRARIES=libextc.la
-libextc_la_SOURCES=libextc.c
-libextc_la_LIBADD= channel/libChannel.a
+lib_LTLIBRARIES= libextc.la
+libextc_la_SOURCES= libextc.c
+libextc_la_LIBADD= channel/libChannel.a thrd/libThrd.a
 include_HEADERS= \
 	include/extchannel.h\
 	include/extcdecl.h\
 	include/extco.h\
 	include/asm-port.h\
+	include/extthrd.h\
 	include/compiler.h

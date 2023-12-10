@@ -16,16 +16,10 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.]
 ***/
 
-void _register()
-{
-	chreceive();
-	chsend();
-	chinit();
-	chfree();
-	spawn_thread();
-	gettid();
-}
+#ifndef __EXT_COMPILER_H
+#define __EXT_COMPILER_H
 
-void _start()
-{
-}
+#define __gcc_attr(_attr) [[gnu::__attr]]
+#define __packed __gcc_attr(packed)
+
+#endif

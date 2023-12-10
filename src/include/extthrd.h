@@ -16,16 +16,41 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.]
 ***/
 
-void _register()
-{
-	chreceive();
-	chsend();
-	chinit();
-	chfree();
-	spawn_thread();
-	gettid();
-}
+#ifndef _EXT_THRD_H
+#define _EXT_THRD_H
 
-void _start()
+#include <extcdecl.h>
+#include <sched.h>
+#include <compiler.h>
+
+enum _extthrderr
 {
-}
+	E_ATTRNULL = 1,
+	E_MMAPFAIL,
+};
+
+/*
+	TODO: Get these properly, instead of just setting to constant
+*/
+#define THREADS_MAX 250000
+#define THREAD_STACK_SIZE 0x10000
+
+
+typedef pid_t exttid_t;
+
+typedef struct
+{
+	exttid_t _tid;
+	unsigned long _flags;
+}exttattr_t;
+
+extern exttattr_t _threads[THREADS_MAX];
+
+BEGIN_EXTCDECL
+
+int spawn_thread(exttattr_t *attr, int(*fn)());
+exttid_t gettid();
+
+END_EXTCDECL
+
+#endif
