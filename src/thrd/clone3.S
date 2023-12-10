@@ -20,7 +20,7 @@
 
 .extern foo2
 
-.extern exit
+.extern exit_thread
 
 .section .text
 .global clone3
@@ -45,7 +45,7 @@ clone3:
 
 	call *%rdx
 	mov %rax, %rdi
-	call exit
+	call exit_thread
 
 .reterr:
 	mov -1, %rax
