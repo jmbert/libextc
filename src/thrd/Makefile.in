@@ -127,7 +127,8 @@ am__v_AR_1 =
 libThrd_a_AR = $(AR) $(ARFLAGS)
 libThrd_a_LIBADD =
 am_libThrd_a_OBJECTS = libThrd_a-spawn_thread.$(OBJEXT) \
-	libThrd_a-gettid.$(OBJEXT) libThrd_a-clone3.$(OBJEXT)
+	libThrd_a-gettid.$(OBJEXT) libThrd_a-clone3.$(OBJEXT) \
+	libThrd_a-exit_thread.$(OBJEXT)
 libThrd_a_OBJECTS = $(am_libThrd_a_OBJECTS)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
@@ -145,6 +146,7 @@ DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__maybe_remake_depfiles = depfiles
 am__depfiles_remade = ./$(DEPDIR)/libThrd_a-clone3.Po \
+	./$(DEPDIR)/libThrd_a-exit_thread.Po \
 	./$(DEPDIR)/libThrd_a-gettid.Po \
 	./$(DEPDIR)/libThrd_a-spawn_thread.Po
 am__mv = mv -f
@@ -334,7 +336,8 @@ libThrd_a_CPPFLAGS = -I$(srcdir)/../include
 libThrd_a_SOURCES = \
 	spawn_thread.c\
 	gettid.c\
-	clone3.S
+	clone3.S\
+	exit_thread.c
 
 all: all-am
 
@@ -385,6 +388,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libThrd_a-clone3.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libThrd_a-exit_thread.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libThrd_a-gettid.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libThrd_a-spawn_thread.Po@am__quote@ # am--include-marker
 
@@ -477,6 +481,20 @@ libThrd_a-gettid.obj: gettid.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gettid.c' object='libThrd_a-gettid.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libThrd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libThrd_a-gettid.obj `if test -f 'gettid.c'; then $(CYGPATH_W) 'gettid.c'; else $(CYGPATH_W) '$(srcdir)/gettid.c'; fi`
+
+libThrd_a-exit_thread.o: exit_thread.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libThrd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libThrd_a-exit_thread.o -MD -MP -MF $(DEPDIR)/libThrd_a-exit_thread.Tpo -c -o libThrd_a-exit_thread.o `test -f 'exit_thread.c' || echo '$(srcdir)/'`exit_thread.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libThrd_a-exit_thread.Tpo $(DEPDIR)/libThrd_a-exit_thread.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='exit_thread.c' object='libThrd_a-exit_thread.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libThrd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libThrd_a-exit_thread.o `test -f 'exit_thread.c' || echo '$(srcdir)/'`exit_thread.c
+
+libThrd_a-exit_thread.obj: exit_thread.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libThrd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libThrd_a-exit_thread.obj -MD -MP -MF $(DEPDIR)/libThrd_a-exit_thread.Tpo -c -o libThrd_a-exit_thread.obj `if test -f 'exit_thread.c'; then $(CYGPATH_W) 'exit_thread.c'; else $(CYGPATH_W) '$(srcdir)/exit_thread.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libThrd_a-exit_thread.Tpo $(DEPDIR)/libThrd_a-exit_thread.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='exit_thread.c' object='libThrd_a-exit_thread.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libThrd_a_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libThrd_a-exit_thread.obj `if test -f 'exit_thread.c'; then $(CYGPATH_W) 'exit_thread.c'; else $(CYGPATH_W) '$(srcdir)/exit_thread.c'; fi`
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -609,6 +627,7 @@ clean-am: clean-generic clean-libtool clean-noinstLIBRARIES \
 
 distclean: distclean-am
 		-rm -f ./$(DEPDIR)/libThrd_a-clone3.Po
+	-rm -f ./$(DEPDIR)/libThrd_a-exit_thread.Po
 	-rm -f ./$(DEPDIR)/libThrd_a-gettid.Po
 	-rm -f ./$(DEPDIR)/libThrd_a-spawn_thread.Po
 	-rm -f Makefile
@@ -657,6 +676,7 @@ installcheck-am:
 
 maintainer-clean: maintainer-clean-am
 		-rm -f ./$(DEPDIR)/libThrd_a-clone3.Po
+	-rm -f ./$(DEPDIR)/libThrd_a-exit_thread.Po
 	-rm -f ./$(DEPDIR)/libThrd_a-gettid.Po
 	-rm -f ./$(DEPDIR)/libThrd_a-spawn_thread.Po
 	-rm -f Makefile

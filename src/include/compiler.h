@@ -19,7 +19,13 @@
 #ifndef __EXT_COMPILER_H
 #define __EXT_COMPILER_H
 
-#define __gcc_attr(_attr) [[gnu::__attr]]
+#define __attr(_attr) [[_attr]]
+
+#define __gcc_attr(_attr) __attribute__((_attr))
 #define __packed __gcc_attr(packed)
+#define __constructor __gcc_attr(constructor)
+#define __init __constructor
+
+#define __noreturn __attr(noreturn)
 
 #endif

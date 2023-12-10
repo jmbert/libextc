@@ -33,4 +33,5 @@ include_HEADERS= \
 	include/extco.h\
 	include/asm-port.h\
 	include/extthrd.h\
-	include/compiler.h
+	include/compiler.h\
+	include/extpanic.h

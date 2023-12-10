@@ -38,17 +38,40 @@ enum _extthrderr
 
 typedef pid_t exttid_t;
 
+enum _t_states
+{
+	T_RUNNING,
+	T_EXITED,
+	T_ZOMBIE,
+	T_JOINED,
+};
+
 typedef struct
 {
 	exttid_t _tid;
 	unsigned long _flags;
+
+	unsigned int _state;
+	void *_ret;
+
+	void *stack;
+	unsigned long stacksize;
 }exttattr_t;
 
-extern exttattr_t _threads[THREADS_MAX];
+extern exttattr_t *_threads[THREADS_MAX];
+extern pid_t group_pid;
+
+#define _THREAD_INDEX(_tid) (_tid-group_pid)
+#define _GET_THREAD_ATTR(_tid) (_threads[_THREAD_INDEX(_tid)])
+#define _IS_RUNNING(_tid) (_GET_THREAD_ATTR(_tid)->_state == T_RUNNING)
 
 BEGIN_EXTCDECL
 
+__init void __threads_init();
+
 int spawn_thread(exttattr_t *attr, int(*fn)());
+
+__noreturn void exit_thread(void *_retval);
 exttid_t gettid();
 
 END_EXTCDECL

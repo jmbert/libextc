@@ -13467,6 +13467,8 @@ else
 fi
 
 
+CFLAGS+=" -std=gnu2x -fPIC"
+
 # By default we simply use the C compiler to build assembly code.
 
 test "${CCAS+set}" = set || CCAS=$CC

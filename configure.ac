@@ -33,6 +33,8 @@ AC_CONFIG_FILES(
 	[src/thrd/Makefile]
 )
 AC_PROG_CC
+CFLAGS+=" -std=gnu2x -fPIC"
+
 AM_PROG_AS
 
 AC_LANG([C])

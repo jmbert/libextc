@@ -24,6 +24,8 @@ void _register()
 	chfree();
 	spawn_thread();
 	gettid();
+	exit_thread();
+	_thread_zombie_idle();
 }
 
 void _start()

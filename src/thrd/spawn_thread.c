@@ -26,14 +26,15 @@
 #include <stdlib.h>
 #include <signal.h>
 
-exttattr_t _threads[THREADS_MAX];
+exttattr_t *_threads[THREADS_MAX] = {0};
 
-int clone_return;
+pid_t group_pid;
 
 extern long clone3(struct clone_args *args, size_t size, void(*fn_ptr)());
 
 int spawn_thread(exttattr_t *attr, int(*fn)())
 {
+ 	group_pid = gettid();
 	if (!attr)
 	{
 		return -E_ATTRNULL;
@@ -44,23 +45,29 @@ int spawn_thread(exttattr_t *attr, int(*fn)())
 				CLONE_THREAD | CLONE_SIGHAND | CLONE_VM | 
 				CLONE_PARENT_SETTID;
 
-	args->stack = mmap(NULL, THREAD_STACK_SIZE, PROT_READ | PROT_WRITE,
+	args->stack = (__u64)mmap(NULL, THREAD_STACK_SIZE, PROT_READ | PROT_WRITE,
 						MAP_PRIVATE | MAP_ANONYMOUS |
 						MAP_GROWSDOWN |
 						MAP_STACK, -1, 0);
 
-	if (args->stack == NULL)
+	if (args->stack == (__u64)NULL)
 	{
 		return -E_MMAPFAIL;
 	} /* So we don't immediatly segfault on a push */
 	args->stack_size = THREAD_STACK_SIZE;
 
 	attr->_flags = args->flags;
-	long ret = clone3(args, sizeof(struct clone_args), fn);
+	attr->_ret = NULL;
+	attr->_state = T_RUNNING;
+	attr->stack = (void*)args->stack;
+	attr->stacksize = args->stack_size;
+	long ret = clone3(args, sizeof(struct clone_args), (void(*)())fn);
 	if (ret == -1)
 	{
 		return ret;
 	}
+
+	_threads[_THREAD_INDEX(ret)] = attr;
 
 	return 0;
 }

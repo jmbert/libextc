@@ -23,4 +23,5 @@ libThrd_a_CPPFLAGS= -I$(srcdir)/../include
 libThrd_a_SOURCES= \
 	spawn_thread.c\
 	gettid.c\
-	clone3.S
+	clone3.S\
+	exit_thread.c
